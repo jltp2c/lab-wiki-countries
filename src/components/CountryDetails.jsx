@@ -1,14 +1,14 @@
-import { useState, useEffect } from 'react';
+// import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
+// import axios from 'axios';
 import Spinner from './Spinner';
 
 
 
-function CountryDetails({countriesList}) {
+function CountryDetails({countriesList,setCountries}) {
 
 let {idAlpha} = useParams()
-const url = "https://ih-countries-api.herokuapp.com/countries/"
+// const url = "https://ih-countries-api.herokuapp.com/countries/"
 
 //using without Axios
 const country = countriesList.find((country) => country.alpha3Code ===  idAlpha)
