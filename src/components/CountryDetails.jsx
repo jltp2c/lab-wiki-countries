@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import Spinner from './Spinner';
 
 
 
@@ -30,6 +31,9 @@ const country = countriesList.find((country) => country.alpha3Code ===  idAlpha)
   //   getOneCountry();
   // }, []);
 
+  if(!country){
+    return <Spinner/>
+  }
 
 
   return (
@@ -53,11 +57,13 @@ const country = countriesList.find((country) => country.alpha3Code ===  idAlpha)
                         country &&
                         country.borders.map((border)=>{
                          
-                        const borderCountries = countriesList.filter(countryMap => countryMap.alpha3Code === border)
+                        const borderCountries = countriesList.find(countryMap => countryMap.alpha3Code === border)
+
+                        console.log(borderCountries)
 
                          return  <li key={border}><a href={`/${border}`}>
                             
-                         { borderCountries.map(elem => elem.name.common )}
+                         { borderCountries.name.common}
                             
                             </a></li>
                         })         

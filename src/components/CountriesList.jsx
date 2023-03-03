@@ -1,7 +1,25 @@
 import React from 'react'
 import {Link} from "react-router-dom"
+import { useEffect } from 'react';
+import axios from 'axios';
 
-function CountriesList({countriesList}) {
+function CountriesList({countriesList,setCountries}) {
+  const url = 'https://ih-countries-api.herokuapp.com/countries';
+  console.log(url);
+   const getCountries = async () => {
+    try {
+      const res = await axios.get(url);
+      console.log(res.data)
+      
+      setCountries(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getCountries();
+  }, []);
 
   return (
     

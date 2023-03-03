@@ -4,36 +4,21 @@ import NavBar from './components/NavBar';
 import CountriesList from './components/CountriesList';
 import { Route, Routes } from 'react-router-dom';
 import CountryDetails from './components/CountryDetails';
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 
 function App() {
-  const url = 'https://ih-countries-api.herokuapp.com/countries';
   const [data, setData] = useState([]);
-
-  const getCountries = async () => {
-    try {
-      const res = await axios.get(url);
-      setData(res.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    getCountries();
-  }, [data]);
 
   return (
     <div className="App">
       <header className="navbar navbar-dark bg-primary mb-3">
         <NavBar />
       </header>
-      {data.length && (
+      {
         <main>
           <div className="container">
             <div className="row">
-              <CountriesList countriesList={data} />
+              <CountriesList countriesList={data} setCountries={setData} />
               <Routes>
                 <Route
                   path="/:idAlpha"
@@ -43,7 +28,7 @@ function App() {
             </div>
           </div>
         </main>
-      )}
+      }
     </div>
   );
 }
