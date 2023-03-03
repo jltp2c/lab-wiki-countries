@@ -1,35 +1,35 @@
-// import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-// import axios from 'axios';
+import axios from 'axios';
 import Spinner from './Spinner';
 
 
 
-function CountryDetails({countriesList,setCountries}) {
+function CountryDetails({countriesList}) {
 
 let {idAlpha} = useParams()
-// const url = "https://ih-countries-api.herokuapp.com/countries/"
+const url = "https://ih-countries-api.herokuapp.com/countries/"
 
 //using without Axios
-const country = countriesList.find((country) => country.alpha3Code ===  idAlpha)
+// const country = countriesList.find((country) => country.alpha3Code ===  idAlpha)
 
 
 // i have a problem it doesnt work the loading is weird... try to replace "country to oneCountry below"
-  // const [oneCountry, setOneCountry] = useState([]);
+  const [country, setOneCountry] = useState(null);
 
-  // const getOneCountry= async () => {
-  //   try {
-  //     const response = await axios.get(url+country.alpha3Code);
-  //     console.log(response.data)
-  //     setOneCountry(response.data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  const getOneCountry= async () => {
+    try {
+      const response = await axios.get(url+idAlpha);
+      console.log(response.data)
+      setOneCountry(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  // useEffect(() => {
-  //   getOneCountry();
-  // }, []);
+  useEffect(() => {
+    getOneCountry();
+  }, []);
 
   if(!country){
     return <Spinner/>
@@ -54,10 +54,14 @@ const country = countriesList.find((country) => country.alpha3Code ===  idAlpha)
                   <td>
                     <ul>
                       {
-                        country &&
+                        
                         country.borders.map((border)=>{
-                         
-                        const borderCountries = countriesList.find(countryMap => countryMap.alpha3Code === border)
+                         console.log(border);
+                         console.log(countriesList);
+                        const borderCountries = countriesList.find(countryMap => {
+                          console.log("countryMap",countryMap) 
+                          return countryMap.alpha3Code === border
+                        })
 
                         console.log(borderCountries)
 

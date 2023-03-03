@@ -15,7 +15,6 @@ if(!countriesList){
                     countriesList.map(country => (
                         
                           <Link key={countriesList.name} className="list-group-item list-group-item-action"  to={country.alpha3Code}> {country.name.common} <span><img src={`https://flagpedia.net/data/flags/icon/72x54/${country.alpha2Code.toLowerCase()}.png`} alt={country.name.common} /></span></Link> 
-                      
                     ))
                 }
             </div>

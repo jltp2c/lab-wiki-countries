@@ -6,6 +6,7 @@ import { Route, Routes } from 'react-router-dom';
 import CountryDetails from './components/CountryDetails';
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
+import Spinner from './components/Spinner';
 
 function App() {
   const [data, setData] = useState([]);
@@ -27,6 +28,10 @@ function App() {
   useEffect(() => {
     getCountries();
   }, [getCountries]);
+
+  if (!data.length) {
+    return <Spinner />;
+  }
 
   return (
     <div className="App">
